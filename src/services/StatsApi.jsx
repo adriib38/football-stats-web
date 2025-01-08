@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../env"
+const API_BASE_URL = process.env.API_BASE_URL;
 
 export const getClassification = async(competition) => {
     const url = `${API_BASE_URL}/${competition}/classification`;
