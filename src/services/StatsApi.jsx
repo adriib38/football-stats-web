@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://urchin-app-jtmde.ondigitalocean.app/";
+const API_BASE_URL = "https://urchin-app-jtmde.ondigitalocean.app";
 console.log("API_BASE_URL: " +API_BASE_URL)
 export const getClassification = async(competition) => {
     const url = `${API_BASE_URL}/${competition}/classification`;
