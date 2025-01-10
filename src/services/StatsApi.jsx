@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = "https://urchin-app-jtmde.ondigitalocean.app/";
 
 export const getClassification = async(competition) => {
     const url = `${API_BASE_URL}/${competition}/classification`;
@@ -8,7 +8,7 @@ export const getClassification = async(competition) => {
             "Content-Type": "application/json",
         },
     })
-
+    console.log(url)
     const data = await resp.json();
     console.log(url, data)
     return { data }
