@@ -1,6 +1,7 @@
 import './App.css';
 import Competition from './components/Competition/Competition';
 import AppMenu from './components/Header/Header';
+import Team from './components/Team/Team';
 import Inicio from './components/Inicio/Inicio';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
@@ -21,6 +22,12 @@ function App() {
               path="/c/:competition" 
               element={
                 <Competition />
+              }
+            />
+            <Route 
+              path="/t/:team" 
+              element={
+                <Team />
               }
             />
           </Routes>

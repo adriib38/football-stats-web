@@ -76,7 +76,7 @@ export default function TableClassification({ classification }) {
         {classification.map((team, index) => (
           <tr key={index}>
             <td>{team.Rk}</td>
-            <td>{team.Squad}</td>
+            <td><a href={`/t/${team.Squad}`} style={{textDecoration: "none", color: "inherit"}}>{team.Squad}</a></td>
             <td>{team.MP}</td>
             <td>{team.W}</td>
             <td>{team.D}</td>
