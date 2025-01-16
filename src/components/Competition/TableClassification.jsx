@@ -21,7 +21,7 @@ export default function TableClassification({ classification }) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-  }
+  };
 
   const Table = styled.table`
     border: 1px solid white;
@@ -50,47 +50,57 @@ export default function TableClassification({ classification }) {
     }
 
     tr:hover {
-      background-color:rgb(110, 102, 163);
+      background-color: rgb(110, 102, 163);
     }
   `;
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>Posición</th>
-          <th>Equipo</th>
-          <th>PJ</th>
-          <th>V</th>
-          <th>D</th>
-          <th>P</th>
-          <th>GF</th>
-          <th>GA</th>
-          <th>GD</th>
-          <th>Pts</th>
-          <th>Goleador</th>
-          <th>Portero</th>
-        </tr>
-      </thead>
-      <tbody>
-        {classification.map((team, index) => (
-          <tr key={index}>
-            <td>{team.Rk}</td>
-            <td><a href={`/t/${team.Squad}`} style={{textDecoration: "none", color: "inherit"}}>{team.Squad}</a></td>
-            <td>{team.MP}</td>
-            <td>{team.W}</td>
-            <td>{team.D}</td>
-            <td>{team.L}</td>
-            <td>{team.GF}</td>
-            <td>{team.GA}</td>
-            <td>{team.GD}</td>
-            <td>{team.Pts}</td>
-            <td>{team.Top_Team_Scorer || "N/A"}</td>
-            <td>{team.Goalkeeper || "N/A"}</td>
+    <div style={{display: "flex", flexDirection: "column"}}>
+      <h2>Clasificación</h2>
+      <Table>
+        <thead>
+          <tr>
+            <th>Posición</th>
+            <th>Equipo</th>
+            <th>PJ</th>
+            <th>V</th>
+            <th>D</th>
+            <th>P</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>Pts</th>
+            <th>Goleador</th>
+            <th>Portero</th>
           </tr>
-        ))}
-      </tbody>
-      <botton onClick={downloadStatsCsv}>Download</botton>
-    </Table>
+        </thead>
+        <tbody>
+          {classification.map((team, index) => (
+            <tr key={index}>
+              <td>{team.Rk}</td>
+              <td>
+                <a
+                  href={`/t/${team.Squad}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  {team.Squad}
+                </a>
+              </td>
+              <td>{team.MP}</td>
+              <td>{team.W}</td>
+              <td>{team.D}</td>
+              <td>{team.L}</td>
+              <td>{team.GF}</td>
+              <td>{team.GA}</td>
+              <td>{team.GD}</td>
+              <td>{team.Pts}</td>
+              <td>{team.Top_Team_Scorer || "N/A"}</td>
+              <td>{team.Goalkeeper || "N/A"}</td>
+            </tr>
+          ))}
+        </tbody>
+        <botton onClick={downloadStatsCsv}>Download</botton>
+      </Table>
+    </div>
   );
 }

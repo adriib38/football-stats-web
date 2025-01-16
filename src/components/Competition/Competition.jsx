@@ -4,6 +4,7 @@ import { getClassification, getStats, getGames } from "../../services/StatsApi";
 import TableClassification from "./TableClassification";
 import TableStats from "./TableStats";
 import BarChart from "../Charts/BarChart";
+import DoughnutChart from "../Charts/PolarArea";
 
 const sectionChartsStyle = {
   display: "flex",
@@ -17,13 +18,11 @@ const sectionChartsStyle = {
 };
 
 const articleChartStyle = {
-  backgroundColor: "#EBD7A5",
-  width: "540px",
-  height: "100%",
+  backgroundColor: "#fff",
+  width: "850px",
   marginBottom: "20px",
   border: "1px solid #ccc",
   padding: "10px",
-  textAlign: "center",
   borderRadius: "10px",
 };
 
@@ -134,117 +133,119 @@ export default function Competition() {
           <a href="#games">Partidos</a>
         </li>
       </ul>
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <section style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <article
-          style={{
-            float: "left",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "#D7263D",
-            padding: "10px",
-            borderRadius: "10px",
-            marginRight: "20px",
-            height: "fit-content",
-            color: "white",
-          }}
-        >
-          <img
-            src={srcLogo}
-            alt={competition}
-            width="100"
+
+      <div style={{display: "flex", flexDirection: "column", gap: "100px"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <section style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <article
             style={{
+              float: "left",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#D7263D",
+              padding: "10px",
+              borderRadius: "10px",
+              marginRight: "20px",
               height: "fit-content",
-              backgroundColor: "white",
-              padding: "5px",
+              color: "white",
             }}
-          />
-          <p>Última actualización: {dateOfLastUpdate}</p>
-        </article>
-        <article
-          style={{
-            float: "left",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "#1B998B",
-            padding: "10px",
-            borderRadius: "10px",
-            marginRight: "20px",
-            height: "fit-content",
-            color: "white",
-          }}
-        >
-          <p><b>Proximo partido: </b><br></br>{proximoPartido()}</p>
-        </article>
-        </section>
-        <TableClassification classification={classification} />
-      </div>
+          >
+            <img
+              src={srcLogo}
+              alt={competition}
+              width="100"
+              style={{
+                height: "fit-content",
+                backgroundColor: "white",
+                padding: "5px",
+              }}
+            />
+            <p>Última actualización: {dateOfLastUpdate}</p>
+          </article>
+          <article
+            style={{
+              float: "left",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#1B998B",
+              padding: "10px",
+              borderRadius: "10px",
+              marginRight: "20px",
+              height: "fit-content",
+              color: "white",
+            }}
+          >
+            <p><b>Proximo partido: </b><br></br>{proximoPartido()}</p>
+          </article>
+          </section>
+          <TableClassification classification={classification} />
+        </div>
 
-      <h1 id="estadisticas">Estadísticas</h1>
-      <div style={{ display: "flex" }}>
-        <TableStats stats={stats} />
-      </div>
+        <div>
+          <h2>Estadisticas temporada actual</h2>
+          <TableStats stats={stats} />
+        </div>
 
-      <div id="chart">
-        <h1>Charts</h1>
-        <section style={sectionChartsStyle}>
-          <article style={articleChartStyle}>
-            <BarChart
-              dataset={classification}
-              datasetmap={classification.map((team) => team.Pts)}
-              title="Puntos"
-            />
-          </article>
-          <article style={articleChartStyle}>
-            <BarChart
-              dataset={classification}
-              datasetmap={classification.map((team) => team.Attendance)}
-              title="Asistencia"
-            />
-          </article>
-          <article style={articleChartStyle}>
-            <BarChart
-              dataset={stats}
-              datasetmap={stats.map((team) => team.Age)}
-              title="Media edad"
-            />
-          </article>
-          <article style={articleChartStyle}>
-            <BarChart
-              dataset={classification}
-              datasetmap={classification.map((team) => team.GF)}
-              title="Goles a favor"
-            />
-          </article>
-        </section>
-      </div>
+        <div id="chart">
+          <section style={sectionChartsStyle}>
+            <article style={articleChartStyle}>
+              <BarChart
+                dataset={classification}
+                datasetmap={classification.map((team) => team.Pts)}
+                title="Puntos"
+              />
+            </article>
+            <article style={articleChartStyle}>
+              <DoughnutChart
+                dataset={classification}
+                datasetmap={classification.map((team) => team.xGD)}
+                title="xGD"
+              />
+            </article>
+            <article style={articleChartStyle}>
+              <BarChart
+                dataset={stats}
+                datasetmap={stats.map((team) => team.Age)}
+                title="Media edad"
+              />
+            </article>
+            <article style={articleChartStyle}>
+              <BarChart
+                dataset={classification}
+                datasetmap={classification.map((team) => team.GF)}
+                title="Goles a favor"
+              />
+            </article>
+          </section>
+        </div>
 
-      <div id="games">
-        <h1>Partidos</h1>
-        <table style={tablePartidosStyle}>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Estadio</th>
-              <th>Local</th>
-              <th>Visitante</th>
-              <th>Resultado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {games.map((game) => (
-              <tr key={game.Home + game.Away}>
-                <td style={tablePartidosThTdStyle}>{game.Date.split("T")[0]}</td>
-                <td style={tablePartidosThTdStyle}>{game.Venue}</td>
-                <td style={tablePartidosThTdStyle}>{game.Home}</td>
-                <td style={tablePartidosThTdStyle}>{game.Away}</td>
-                <td style={tablePartidosThTdStyle}>{game.Score === null ? "Por jugar" : `${game.Score}`}</td>
+        <div id="games">
+          <h2>Partidos</h2>
+          <table style={tablePartidosStyle}>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Estadio</th>
+                <th>Local</th>
+                <th>Visitante</th>
+                <th>Resultado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {games.map((game) => (
+                <tr key={game.Home + game.Away}>
+                  <td style={tablePartidosThTdStyle}>{game.Date.split("T")[0]}</td>
+                  <td style={tablePartidosThTdStyle}>{game.Venue}</td>
+                  <td style={tablePartidosThTdStyle}>{game.Home}</td>
+                  <td style={tablePartidosThTdStyle}>{game.Away}</td>
+                  <td style={tablePartidosThTdStyle}>{game.Score === null ? "Por jugar" : `${game.Score}`}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

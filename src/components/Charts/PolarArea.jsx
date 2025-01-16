@@ -1,33 +1,20 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { PolarArea } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
   Title,
   Tooltip,
   Legend,
+  ArcElement,
+  PolarAreaController,
+  RadialLinearScale
 } from "chart.js";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(PolarAreaController, ArcElement, Title, Tooltip, Legend, RadialLinearScale);
 
-export default function BarChart({ dataset, title, datasetmap }) {
-datasetmap = datasetmap.map((value) => parseInt(value));
+export default function PolarAreaChart({ dataset, title, datasetmap }) {
+  datasetmap = datasetmap.map((value) => parseInt(value));
   const options = {
-    indexAxis: "x",
-    elements: {
-      bar: {
-        borderWidth: 2,
-      },
-    },
     responsive: true,
     plugins: {
       legend: {
@@ -68,6 +55,9 @@ datasetmap = datasetmap.map((value) => parseInt(value));
   };
 
   return (
-    <Bar data={data} options={options} />
+    <PolarArea
+      data={data}
+      options={options}
+    />
   );
 }
