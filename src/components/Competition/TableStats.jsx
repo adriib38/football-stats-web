@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { CompetitionContext } from "../../context/CompetitionContext";
 
+export default function TableStats() {
+  const { stats } = useContext(CompetitionContext);
 
-
-export default function TableStats({ stats }) {
   const downloadStatsCsv = () => {
     const replacer = (key, value) => (value === null ? "" : value);
     const header = Object.keys(stats[0]);
@@ -24,7 +26,6 @@ export default function TableStats({ stats }) {
     a.click();
     document.body.removeChild(a);
   }
-
 
   const Table = styled.table`
     border: 1px solid white;
@@ -91,7 +92,7 @@ export default function TableStats({ stats }) {
           </tr>
         ))}
       </tbody>
-      <botton onClick={downloadStatsCsv}>Download</botton>
+      {/* <botton onClick={downloadStatsCsv}>Download</botton> */}
     </Table>
   );
 }

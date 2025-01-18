@@ -99,7 +99,7 @@ export default function TableClassification({ classification }) {
             </tr>
           ))}
         </tbody>
-        <botton onClick={downloadStatsCsv}>Download</botton>
+        {/* <botton onClick={downloadStatsCsv}>Download</botton> */}
       </Table>
     </div>
   );

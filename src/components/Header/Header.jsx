@@ -20,7 +20,7 @@ export default function AppMenu() {
 
   return (
     <>
-      <header style={{background: 'blue', color: 'white', height: 50, textAlign: 'center'}}>
+      <header style={{background: 'black', color: 'white', height: 50, textAlign: 'center'}}>
 
       </header>
       <aside style={asideStyle}>

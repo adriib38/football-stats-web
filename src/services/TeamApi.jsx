@@ -9,6 +9,5 @@ export const getTeam = async(team) => {
         },
     });
     const data = await resp.json();
-    console.log(url, data)
     return { data, resp }
 }
