@@ -1,26 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getClassification, getStats, getGames } from "../../services/StatsApi";
 import TableClassification from "./TableClassification";
 import TableStats from "./TableStats";
 
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
 import { CompetitionContext } from "../../context/CompetitionContext";
 import Charts from "./Charts";
 import Games from "./Games";
 
-
-
-
 export default function Competition() {
   const { competition } = useParams();
   const [matchday, setMatchday] = useState(0);
-  const [valueTab, setValueTab] = useState('1');
+  const [valueTab, setValueTab] = useState("1");
 
-  const { setCompetition, classification, stats, games, loading, error } = useContext(CompetitionContext);
+  const { setCompetition, classification, games, error } =
+    useContext(CompetitionContext);
 
   const handleTabChange = (event, newValue) => {
     setValueTab(newValue);
@@ -51,6 +48,20 @@ export default function Competition() {
     return "No hay partidos próximos";
   };
 
+  const championsTeams = () => {
+    const teams = classification.slice(0, 4);
+    if (teams.length === 0) {
+      return "No hay.";
+    }
+    const content = `
+      <ol>
+        ${teams.map((e) => `<li>${e.Squad}</li>`).join("")}
+      </ol>
+    `;
+
+    return content;
+  };
+
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -77,102 +88,115 @@ export default function Competition() {
       >
         <h1>{competition}</h1>
         <p>Matchday: {matchday}</p>
-        <ul style={{ display: "flex", gap: "130px" }}>
-          <li>
-            <a href="#estadisticas">Estadísticas</a>
-          </li>
-          <li>
-            <a href="#charts">Graficos</a>
-          </li>
-          <li>
-            <a href="#games">Partidos</a>
-          </li>
-        </ul>
       </header>
 
-      <TabContext value={valueTab}>
-        <div sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleTabChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-            <Tab label="Item Three" value="3" />
-          </TabList>
-        </div>
-        <TabPanel value="1">Item One</TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
-      </TabContext>
-
-      <div style={{ display: "flex", flexDirection: "column", gap: "100px" }}>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <section
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+      <div>
+        <section style={{ display: "flex", flexWrap:"wrap", flexDirection: "row", gap: "20px" }}>
+          <article
+            style={{
+              float: "left",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#D7263D",
+              padding: "10px",
+              borderRadius: "10px",
+              height: "fit-content",
+              color: "white",
+            }}
           >
-            <article
+            <img
+              src={srcLogo}
+              alt={competition}
+              width="100"
               style={{
-                float: "left",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                backgroundColor: "#D7263D",
-                padding: "10px",
-                borderRadius: "10px",
-                marginRight: "20px",
-                height: "fit-content",
-                color: "white",
+                width: "140px",
+                height: "120px",
+                backgroundColor: "white",
+                padding: "5px",
               }}
-            >
-              <img
-                src={srcLogo}
-                alt={competition}
-                width="100"
-                style={{
-                  width: "140px",
-                  height: "120px",
-                  backgroundColor: "white",
-                  padding: "5px",
+            />
+            <p>Última actualización: {dateOfLastUpdate}</p>
+          </article>
+          <article
+            style={{
+              float: "left",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#1B998B",
+              padding: "10px",
+              borderRadius: "10px",
+              height: "fit-content",
+              color: "white",
+            }}
+          >
+            <p>
+              <b>Proximo partido: </b>
+              <br></br>
+              {proximoPartido()}
+            </p>
+          </article>
+          <article
+            style={{
+              padding: "10px 30px",
+              backgroundColor: "#4C476B",          
+              borderRadius: "10px",
+              height: "fit-content",
+              color: "white",
+            }}
+          >
+            <p>
+              <b>Champions</b>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: championsTeams(),
                 }}
               />
-              <p>Última actualización: {dateOfLastUpdate}</p>
-            </article>
-            <article
-              style={{
-                float: "left",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                backgroundColor: "#1B998B",
-                padding: "10px",
-                borderRadius: "10px",
-                marginRight: "20px",
-                height: "fit-content",
-                color: "white",
-              }}
+            </p>
+          </article>
+        </section>
+        <TabContext value={valueTab}>
+          <div sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList
+              onChange={handleTabChange}
+              aria-label="lab API tabs example"
             >
-              <p>
-                <b>Proximo partido: </b>
-                <br></br>
-                {proximoPartido()}
-              </p>
-            </article>
-          </section>
-          <TableClassification classification={classification} />
-        </div>
-
-        <div>
-          <h2>Estadisticas temporada actual</h2>
-          <TableStats />
-        </div>
-
-        <div id="chart">
-          <h2>Charts</h2>
-          <Charts />
-        </div>
-
-        <div id="games">
-          <h2>Partidos</h2>
-          <Games />
-        </div>
+              <Tab
+                sx={{ color: "success.main" }}
+                label="Clasificación"
+                value="1"
+              />
+              <Tab label="Partidos" value="2" />
+              <Tab label="Gráficos" value="3" />
+              <Tab label="Estadísticas equipos" value="4" />
+            </TabList>
+          </div>
+          <TabPanel value="1">
+            <div id="games">
+              <h2>Clasificación</h2>
+              <TableClassification />
+            </div>
+          </TabPanel>
+          <TabPanel value="2">
+            <div id="games">
+              <h2>Partidos</h2>
+              <Games />
+            </div>
+          </TabPanel>
+          <TabPanel value="3">
+            <div id="chart">
+              <h2>Charts</h2>
+              <Charts />
+            </div>
+          </TabPanel>
+          <TabPanel value="4">
+            <div id="stats">
+              <h2>Estadísticas temporada actual</h2>
+              <TableStats />
+            </div>
+          </TabPanel>
+        </TabContext>
       </div>
     </div>
   );

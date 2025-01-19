@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { CompetitionContext } from "../../context/CompetitionContext";
 
-export default function TableClassification({ classification }) {
+export default function TableClassification() {
+    const { classification } = useContext(CompetitionContext);
+
   const downloadStatsCsv = () => {
     const replacer = (key, value) => (value === null ? "" : value);
     const header = Object.keys(classification[0]);
@@ -24,18 +28,19 @@ export default function TableClassification({ classification }) {
   };
 
   const Table = styled.table`
-    border: 1px solid white;
+    border: 10px solid #1B998B;
     border-radius: 20px;
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 100%;
-    color: #f2f2f2;
-    font-weight: bold;
+    background: #f7f7f7;
+    color: rgb(32, 32, 32);
     font-size: 1.2em;
     margin: 0 auto;
     margin-bottom: 20px;
-    background-color: #4c476b;
+
     thead {
-      background-color: #f46036;
+      color: white;
+      background-color: #1B998B;
     }
 
     th,
@@ -46,17 +51,33 @@ export default function TableClassification({ classification }) {
 
     td {
       padding: 12px;
-      border-bottom: 1px solid white;
+      border-bottom: 5px solid white;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    thead tr:first-child th {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    tbody tr:last-child td:first-child {
+      border-bottom-left-radius: 20px;
+    }
+
+    tbody tr:last-child td:last-child {
+      border-bottom-right-radius: 20px;
     }
 
     tr:hover {
-      background-color: rgb(110, 102, 163);
+      background-color:rgba(27, 153, 138, 0.13);
     }
   `;
 
   return (
     <div style={{display: "flex", flexDirection: "column"}}>
-      <h2>Clasificación</h2>
       <Table>
         <thead>
           <tr>
