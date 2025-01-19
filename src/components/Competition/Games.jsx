@@ -69,7 +69,7 @@ export default function Games() {
       <tbody>
         {games.map((game) => (
           <tr key={game.Home + game.Away}>
-            <td>{game.Date.split("T")[0]}</td>
+            <td>{new Date(game.Date).toLocaleString().split(",")[0]} - {game.Time.split(":")[0]}:{game.Time.split(":")[1]}h</td>
             <td>{game.Home}</td>
             <td>{game.Away}</td>
             <td>

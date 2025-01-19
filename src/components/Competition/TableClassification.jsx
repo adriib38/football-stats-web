@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CompetitionContext } from "../../context/CompetitionContext";
 
 export default function TableClassification() {
-    const { classification } = useContext(CompetitionContext);
+  const { classification } = useContext(CompetitionContext);
 
   const downloadStatsCsv = () => {
     const replacer = (key, value) => (value === null ? "" : value);
@@ -28,7 +28,7 @@ export default function TableClassification() {
   };
 
   const Table = styled.table`
-    border: 10px solid #1B998B;
+    border: 10px solid #1b998b;
     border-radius: 20px;
     border-collapse: separate;
     width: 100%;
@@ -40,7 +40,7 @@ export default function TableClassification() {
 
     thead {
       color: white;
-      background-color: #1B998B;
+      background-color: #1b998b;
     }
 
     th,
@@ -53,6 +53,19 @@ export default function TableClassification() {
       padding: 12px;
       border-bottom: 5px solid white;
     }
+
+    .top-four {
+      background: #5ca7f78c;
+    }
+
+    .five-seven {
+      background:rgba(247, 206, 92, 0.55);
+    }
+
+    .last-three {
+      background:rgba(247, 92, 92, 0.55);
+    }
+
 
     tr:last-child td {
       border-bottom: none;
@@ -72,12 +85,12 @@ export default function TableClassification() {
     }
 
     tr:hover {
-      background-color:rgba(27, 153, 138, 0.13);
+      background-color: rgba(27, 153, 138, 0.13);
     }
   `;
 
   return (
-    <div style={{display: "flex", flexDirection: "column"}}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <Table>
         <thead>
           <tr>
@@ -96,29 +109,40 @@ export default function TableClassification() {
           </tr>
         </thead>
         <tbody>
-          {classification.map((team, index) => (
-            <tr key={index}>
-              <td>{team.Rk}</td>
-              <td>
-                <a
-                  href={`/t/${team.Squad}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  {team.Squad}
-                </a>
-              </td>
-              <td>{team.MP}</td>
-              <td>{team.W}</td>
-              <td>{team.D}</td>
-              <td>{team.L}</td>
-              <td>{team.GF}</td>
-              <td>{team.GA}</td>
-              <td>{team.GD}</td>
-              <td>{team.Pts}</td>
-              <td>{team.Top_Team_Scorer || "N/A"}</td>
-              <td>{team.Goalkeeper || "N/A"}</td>
-            </tr>
-          ))}
+      
+          {classification.map((team, index) => {
+            console.log("index: "+index)
+            const rowClass = 
+              index < 4 ? "top-four" : 
+              index < 7 ? "five-seven" : 
+              index > (classification.length - 4) ? "last-three" : 
+              
+              "";
+
+            return (
+              <tr key={index} className={rowClass}>
+                <td>{team.Rk}</td>
+                <td>
+                  <a
+                    href={`/t/${team.Squad}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {index < 4 ? team.Squad : team.Squad}
+                  </a>
+                </td>
+                <td>{team.MP}</td>
+                <td>{team.W}</td>
+                <td>{team.D}</td>
+                <td>{team.L}</td>
+                <td>{team.GF}</td>
+                <td>{team.GA}</td>
+                <td>{team.GD}</td>
+                <td>{team.Pts}</td>
+                <td>{team.Top_Team_Scorer || "N/A"}</td>
+                <td>{team.Goalkeeper || "N/A"}</td>
+              </tr>
+            );
+          })}
         </tbody>
         {/* <botton onClick={downloadStatsCsv}>Download</botton> */}
       </Table>

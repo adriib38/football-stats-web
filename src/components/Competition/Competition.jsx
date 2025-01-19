@@ -28,7 +28,6 @@ export default function Competition() {
 
     const calculateMatchday = () => {
       let matchday = Math.max(...classification.map((c) => c.MP));
-      console.log(matchday);
       setMatchday(matchday);
     };
 
@@ -38,26 +37,44 @@ export default function Competition() {
   }, [classification, competition, setCompetition]);
 
   const proximoPartido = () => {
-    const partido = games.find((game) => game.Score === null);
-    if (partido) {
-      console.log("partido" + partido);
-      return `${partido.Home} vs ${partido.Away} - ${
-        partido.Date.split("T")[0]
-      }`;
-    }
-    return "No hay partidos próximos";
-  };
+    let partidos = games.filter((game) => game.Score === null);
+    partidos = partidos.slice(0, 3);
 
-  const championsTeams = () => {
-    const teams = classification.slice(0, 4);
-    if (teams.length === 0) {
+    if (partidos.length === 0) {
       return "No hay.";
     }
-    const content = `
-      <ol>
-        ${teams.map((e) => `<li>${e.Squad}</li>`).join("")}
-      </ol>
+
+    const content = `<strong>Próximos partidos</strong>
+      <ul>
+          ${partidos
+            .map(
+              (e) => `<li class="li_vs">${e.Home} Vs. ${e.Away}
+          (${new Date(e.Date).toLocaleString().split(",")[0]} 
+          -
+          ${e.Time.split(":")[0]}:${e.Time.split(":")[1]}h)</li>`
+            )
+            .join("")}
+      </ul>
     `;
+
+    return content;
+  };
+
+  const ultimosPartidos = () => {
+    let partidos = games.filter((game) => game.Score != null);
+    partidos = partidos.reverse().slice(0, 3);
+
+    if (partidos.length === 0) {
+      return "No hay.";
+    }
+
+    const content = `<strong>Últimos partidos</strong>
+      <ul>
+        ${partidos
+          .map((e) => `<li>${e.Home} ${e.Score} ${e.Away}</li>`)
+          .join("")}
+    </ul>
+  `;
 
     return content;
   };
@@ -91,7 +108,14 @@ export default function Competition() {
       </header>
 
       <div>
-        <section style={{ display: "flex", flexWrap:"wrap", flexDirection: "row", gap: "20px" }}>
+        <section
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            gap: "20px",
+          }}
+        >
           <article
             style={{
               float: "left",
@@ -99,7 +123,7 @@ export default function Competition() {
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: "#D7263D",
-              padding: "10px",
+              padding: "10px 25px",
               borderRadius: "10px",
               height: "fit-content",
               color: "white",
@@ -120,40 +144,37 @@ export default function Competition() {
           </article>
           <article
             style={{
+              padding: "10px 30px",
+              backgroundColor: "#4C476B",
+              borderRadius: "10px",
+              height: "fit-content",
+              color: "white",
+            }}
+          >
+            <p
+              dangerouslySetInnerHTML={{
+                __html: ultimosPartidos(),
+              }}
+            ></p>
+          </article>
+          <article
+            style={{
               float: "left",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: "#1B998B",
-              padding: "10px",
-              borderRadius: "10px",
-              height: "fit-content",
-              color: "white",
-            }}
-          >
-            <p>
-              <b>Proximo partido: </b>
-              <br></br>
-              {proximoPartido()}
-            </p>
-          </article>
-          <article
-            style={{
               padding: "10px 30px",
-              backgroundColor: "#4C476B",          
               borderRadius: "10px",
               height: "fit-content",
               color: "white",
             }}
           >
-            <p>
-              <b>Champions</b>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: championsTeams(),
-                }}
-              />
-            </p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: proximoPartido(),
+              }}
+            ></p>
           </article>
         </section>
         <TabContext value={valueTab}>
