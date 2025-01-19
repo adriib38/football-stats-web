@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { useContext } from "react";
 import { CompetitionContext } from "../../context/CompetitionContext";
-import styled from "styled-components";
 
 const Table = styled.table`
   border: 10px solid #EBD7A5;

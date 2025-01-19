@@ -111,12 +111,10 @@ export default function TableClassification() {
         <tbody>
       
           {classification.map((team, index) => {
-            console.log("index: "+index)
             const rowClass = 
               index < 4 ? "top-four" : 
               index < 7 ? "five-seven" : 
-              index > (classification.length - 4) ? "last-three" : 
-              
+              index > (classification.length - 4) ? "last-three" :  
               "";
 
             return (
