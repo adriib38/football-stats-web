@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import colorsTeams from "../../utils/colorsTeams";
 import { TeamContext } from "../../context/TeamContext.jsx";
+import Dot from "../../utils/Dot.jsx";
 
 export default function Team() {
   const { team: teamParam } = useParams();
@@ -26,6 +27,12 @@ export default function Team() {
         <button onClick={() => navigate("/")}>Volver al inicio</button>
       </div>
     );
+  }
+
+  const gameToday = (gameDate) => {
+    const dateNow = new Date().toLocaleString().split(",")[0];
+    console.log(gameDate, dateNow)
+    return gameDate === dateNow;
   }
 
   const colorsTeam = colorsTeams.find((ct) => ct.name === teamData.Squad)?.colors || ["#CCCCCC", "#DDDDDD"];
@@ -156,7 +163,10 @@ export default function Team() {
       <tbody>
         {teamGames.slice(0).reverse().map((g) => (
           <tr key={g.Home + g.Away}>
-            <td>{new Date(g.Date).toLocaleString().split(",")[0]} - {g.Time.split(":")[0]}:{g.Time.split(":")[1]}h</td>
+            <td>
+              {gameToday(new Date(g.Date).toLocaleString().split(",")[0]) ? <Dot /> : ""}
+              {new Date(g.Date).toLocaleString().split(",")[0]} - {g.Time.split(":")[0]}:{g.Time.split(":")[1]}h
+              </td>
             <td>
               {g.Home === teamData.Squad ? <strong>{g.Home}</strong> : g.Home}
             </td>

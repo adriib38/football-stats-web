@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { CompetitionContext } from "../../context/CompetitionContext";
+import Dot from "../../utils/Dot.jsx";
 
 const Table = styled.table`
   border: 10px solid #EBD7A5;
@@ -55,6 +56,12 @@ const Table = styled.table`
 export default function Games() {
   const { games } = useContext(CompetitionContext);
 
+  const gameToday = (gameDate) => {
+    const dateNow = new Date().toLocaleString().split(",")[0];
+    console.log(gameDate, dateNow)
+    return gameDate === dateNow;
+  }
+
   return (
     <Table>
       <thead>
@@ -67,9 +74,12 @@ export default function Games() {
         </tr>
       </thead>
       <tbody>
-        {games.map((game) => (
+        {games.slice(0).reverse().map((game) => (
           <tr key={game.Home + game.Away}>
-            <td>{new Date(game.Date).toLocaleString().split(",")[0]} - {game.Time.split(":")[0]}:{game.Time.split(":")[1]}h</td>
+            <td>
+              {gameToday(new Date(game.Date).toLocaleString().split(",")[0]) ? <Dot /> : ""}
+              {new Date(game.Date).toLocaleString().split(",")[0]} - {game.Time.split(":")[0]}:{game.Time.split(":")[1]}h
+              </td>
             <td>{game.Home}</td>
             <td>{game.Away}</td>
             <td>
