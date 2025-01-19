@@ -4,6 +4,11 @@ export default function AppMenu() {
 
   const asideStyle = {
     background: '#4C476B',
+    height: "100px",
+    alignContent: "center",
+    opacity: .8,
+    position: "sticky",
+    top: 0   
   };
   
   const ulStyle = {
@@ -15,25 +20,30 @@ export default function AppMenu() {
   
   const aStyle = {
     color: 'white',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    fontWeight: "bold",
+    fontSize: "1.2em",
   }
 
-  return (
-    <>
-      <header style={{background: 'black', color: 'white', height: 50, textAlign: 'center'}}>
+  
+  const activeStyle = {
+    color: "#FFD700",
+    textDecoration: 'none',
+    fontWeight: "bold",
+    fontSize: "1.2em",
+  };
 
-      </header>
-      <aside style={asideStyle}>
-        <ul style={ulStyle}>
-          <li><NavLink style={aStyle} to="/c/LaLiga">LaLiga 🇪🇸</NavLink></li>
-          <li><NavLink style={aStyle} to="/c/PremierLeague">Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿</NavLink></li>
-          <li><NavLink style={aStyle} to="/c/SerieA">Serie A 🇮🇹</NavLink></li>
-          <li><NavLink style={aStyle} to="/c/Bundesliga">Bundesliga 🇩🇪</NavLink></li>
-          <li><NavLink style={aStyle} to="/c/Ligue1">Ligue 1 🇫🇷</NavLink></li>
-          <li><NavLink style={aStyle} to="/c/Hypermotion">Hypermotion 🇪🇸</NavLink></li>
-        </ul>
-      </aside>
-    </>
+  return (
+    <aside style={asideStyle}>
+      <ul style={ulStyle}>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/LaLiga">LaLiga 🇪🇸</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/PremierLeague">Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/SerieA">Serie A 🇮🇹</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/Bundesliga">Bundesliga 🇩🇪</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/Ligue1">Ligue 1 🇫🇷</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/Hypermotion">Hypermotion 🇪🇸</NavLink></li>
+      </ul>
+    </aside>
   )
 }
   
