@@ -8,7 +8,8 @@ export default function AppMenu() {
     alignContent: "center",
     opacity: .8,
     position: "sticky",
-    top: 0   
+    top: 0,
+    zIndex: 1
   };
   
   const ulStyle = {

@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3005/c";
+const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app/c";
 
 console.log("API_BASE_URL: " +API_BASE_URL)
 export const getClassification = async(competition) => {
