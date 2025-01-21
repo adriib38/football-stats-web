@@ -28,6 +28,10 @@ function App() {
                   path="/t/:team" 
                   element={<Team />}
                 />
+                <Route 
+                  path="*" 
+                  element={<p>404 - Página no encontrada</p>} 
+                />
               </Routes>
             </div>
           </div>

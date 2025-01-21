@@ -25,7 +25,7 @@ export default function TableStats() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-  }
+  };
 
   const Table = styled.table`
     border: 10px solid #4C476B;
@@ -96,23 +96,28 @@ export default function TableStats() {
         </tr>
       </thead>
       <tbody>
-        {safeStats.map((team, index) => (
-          <tr key={index}>
-            <td>{team.Squad}</td>
-            <td>{team.Pl}</td>
-            <td>{team.Age}</td>
-            <td>{team.Poss}</td>
-            <td>{team.MP}</td>
-            <td>{team.Starts}</td>
-            <td>{team.Min}</td>
-            <td>{team["90s"]}</td>
-            <td>{team.Gls}</td>
-            <td>{team.Ast}</td>
-            <td>{team["G_plus_A"]}</td>
+        {safeStats.length > 0 ? (
+          safeStats.map((team, index) => (
+            <tr key={index}>
+              <td>{team.Squad || 'No disponible'}</td>
+              <td>{team.Pl || 'No disponible'}</td>
+              <td>{team.Age || 'No disponible'}</td>
+              <td>{team.Poss || 'No disponible'}</td>
+              <td>{team.MP || 'No disponible'}</td>
+              <td>{team.Starts || 'No disponible'}</td>
+              <td>{team.Min || 'No disponible'}</td>
+              <td>{team["90s"] || 'No disponible'}</td>
+              <td>{team.Gls || 'No disponible'}</td>
+              <td>{team.Ast || 'No disponible'}</td>
+              <td>{team["G_plus_A"] || 'No disponible'}</td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="11">No hay datos disponibles</td>
           </tr>
-        ))}
+        )}
       </tbody>
-      {/* <botton onClick={downloadStatsCsv}>Download</botton> */}
     </Table>
   );
 }

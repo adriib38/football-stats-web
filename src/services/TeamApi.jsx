@@ -5,6 +5,7 @@ export const getTeam = async(team) => {
     const url = `${API_BASE_URL}/${team}`;
     const resp = await fetch(url, {
         method: 'GET',
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
@@ -17,6 +18,7 @@ export const getTeamGames = async(team) => {
     const url = `${API_BASE_URL}/${team}/games`;
     const resp = await fetch(url, {
         method: 'GET',
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
