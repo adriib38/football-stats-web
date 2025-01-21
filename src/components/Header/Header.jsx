@@ -37,12 +37,12 @@ export default function AppMenu() {
   return (
     <aside style={asideStyle}>
       <ul style={ulStyle}>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/LaLiga">LaLiga 🇪🇸</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/PremierLeague">Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/SerieA">Serie A 🇮🇹</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/Bundesliga">Bundesliga 🇩🇪</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/Ligue1">Ligue 1 🇫🇷</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/Hypermotion">Hypermotion 🇪🇸</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/laliga">LaLiga 🇪🇸</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/premierleague">Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/seriea">Serie A 🇮🇹</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/bundesliga">Bundesliga 🇩🇪</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/ligue1">Ligue 1 🇫🇷</NavLink></li>
+        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/hypermotion">Hypermotion 🇪🇸</NavLink></li>
       </ul>
     </aside>
   )
