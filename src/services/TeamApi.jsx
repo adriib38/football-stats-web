@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:3005/t";
+// const API_BASE_URL = "http://localhost:3005/t";
+const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app/t";
 
 export const getTeam = async(team) => {
     const url = `${API_BASE_URL}/${team}`;
