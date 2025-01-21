@@ -27,36 +27,41 @@ const articleChartStyle = {
 export default function Charts() {
   const { classification, stats, loading, error } = useContext(CompetitionContext);
 
+  const safeClassification = Array.isArray(classification) ? classification : [];
+  const safeStats = Array.isArray(stats) ? stats : [];
+
   return (
     <section style={sectionChartsStyle}>
       <article style={articleChartStyle}>
         <BarChart
-          dataset={classification}
-          datasetmap={classification.map((team) => team.Pts)}
+          dataset={safeClassification}
+          datasetmap={safeClassification.map((team) => team.Pts)}
           title="Puntos"
         />
       </article>
       <article style={articleChartStyle}>
         <DoughnutChart
-          dataset={classification}
-          datasetmap={classification.map((team) => team.xGD)}
+          dataset={safeClassification}
+          datasetmap={safeClassification.map((team) => team.xGD)}
           title="xGD"
         />
       </article>
       <article style={articleChartStyle}>
         <BarChart
-          dataset={stats}
-          datasetmap={stats.map((team) => team.Age)}
+          dataset={safeStats}
+          datasetmap={safeStats.map((team) => team.Age)}
           title="Media edad"
         />
       </article>
       <article style={articleChartStyle}>
         <BarChart
-          dataset={classification}
-          datasetmap={classification.map((team) => team.GF)}
+          dataset={safeClassification}
+          datasetmap={safeClassification.map((team) => team.GF)}
           title="Goles a favor"
         />
       </article>
     </section>
   );
+
+
 }

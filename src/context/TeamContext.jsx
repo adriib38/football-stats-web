@@ -19,7 +19,6 @@ export function TeamContextProvider({ children }) {
       setLoading(true);
       
       try {
-        console.log("Ha buscar: "+team)
         const [teamResp, teamGamesResp] = await Promise.all([
           getTeam(team),
           getTeamGames(team)

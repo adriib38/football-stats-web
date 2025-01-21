@@ -5,10 +5,17 @@ import { CompetitionContext } from "../../context/CompetitionContext";
 export default function TableClassification() {
   const { classification } = useContext(CompetitionContext);
 
+  const sortedClassification = classification.sort((a, b) => {
+    if (b.Pts !== a.Pts) {
+      return b.Pts - a.Pts;
+    }
+    return b.GD - a.GD;
+  });
+  
   const downloadStatsCsv = () => {
     const replacer = (key, value) => (value === null ? "" : value);
-    const header = Object.keys(classification[0]);
-    let csv = classification.map((row) =>
+    const header = Object.keys(sortedClassification[0]);
+    let csv = sortedClassification.map((row) =>
       header
         .map((fieldName) => JSON.stringify(row[fieldName], replacer))
         .join(",")
@@ -59,13 +66,12 @@ export default function TableClassification() {
     }
 
     .five-seven {
-      background:rgba(247, 206, 92, 0.55);
+      background: rgba(247, 206, 92, 0.55);
     }
 
     .last-three {
-      background:rgba(247, 92, 92, 0.55);
+      background: rgba(247, 92, 92, 0.55);
     }
-
 
     tr:last-child td {
       border-bottom: none;
@@ -109,13 +115,15 @@ export default function TableClassification() {
           </tr>
         </thead>
         <tbody>
-      
-          {classification.map((team, index) => {
-            const rowClass = 
-              index < 4 ? "top-four" : 
-              index < 7 ? "five-seven" : 
-              index > (classification.length - 4) ? "last-three" :  
-              "";
+          {sortedClassification.map((team, index) => {
+            const rowClass =
+              index < 4
+                ? "top-four"
+                : index < 7
+                ? "five-seven"
+                : index > classification.length - 4
+                ? "last-three"
+                : "";
 
             return (
               <tr key={index} className={rowClass}>
@@ -142,7 +150,6 @@ export default function TableClassification() {
             );
           })}
         </tbody>
-        {/* <botton onClick={downloadStatsCsv}>Download</botton> */}
       </Table>
     </div>
   );

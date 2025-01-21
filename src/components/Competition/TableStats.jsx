@@ -76,6 +76,8 @@ export default function TableStats() {
     }
   `;
 
+  const safeStats = Array.isArray(stats) ? stats : [];
+
   return (
     <Table>
       <thead>

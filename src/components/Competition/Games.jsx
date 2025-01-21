@@ -58,7 +58,6 @@ export default function Games() {
 
   const gameToday = (gameDate) => {
     const dateNow = new Date().toLocaleString().split(",")[0];
-    console.log(gameDate, dateNow)
     return gameDate === dateNow;
   }
 
