@@ -96,7 +96,7 @@ export default function TableStats() {
         </tr>
       </thead>
       <tbody>
-        {stats.map((team, index) => (
+        {safeStats.map((team, index) => (
           <tr key={index}>
             <td>{team.Squad}</td>
             <td>{team.Pl}</td>
