@@ -1,6 +1,7 @@
 import './App.css';
 import Competition from './components/Competition/Competition';
 import AppMenu from './components/Header/Header';
+import Footer from './components/Footer/Footer.jsx';
 import Team from './components/Team/Team';
 import Inicio from './components/Inicio/Inicio';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
@@ -35,6 +36,7 @@ function App() {
               </Routes>
             </div>
           </div>
+          <Footer />
         </TeamContextProvider>
       </CompetitionContextProvider>
     </BrowserRouter>

@@ -9,81 +9,79 @@ export default function Team() {
   const { team: teamParam } = useParams();
   const navigate = useNavigate();
 
-  const { teamData, team, setTeam, teamGames, notFound } = useContext(TeamContext);
+  const { teamData, loading, setTeam, teamGames, notFound } =
+    useContext(TeamContext);
 
   useEffect(() => {
     if (teamParam) setTeam(teamParam);
-    
-  }, [teamParam, teamData, setTeam]);
+  }, [teamParam, setTeam]);
 
-  if (notFound) {
-    return (
-      <div style={{ textAlign: "center", padding: "50px" }}>
-        <h1 style={{ color: "red" }}>Equipo no encontrado</h1>
-        <p>
-          No se pudo encontrar el equipo <strong>{teamParam}</strong>. Por
-          favor, verifica el nombre o intenta con otro equipo.
-        </p>
-        <button onClick={() => navigate("/")}>Volver al inicio</button>
-      </div>
-    );
-  }
+  document.title = teamParam;
 
   const gameToday = (gameDate) => {
     const dateNow = new Date().toLocaleString().split(",")[0];
     return gameDate === dateNow;
-  }
+  };
 
-  const colorsTeam = colorsTeams.find((ct) => ct.name === teamData.Squad)?.colors || ["#CCCCCC", "#DDDDDD"];
+  const colorsTeam = colorsTeams.find((ct) => ct.name === teamData.Squad)
+    ?.colors || ["#CCCCCC", "#DDDDDD"];
 
   const Table = styled.table`
-  border: 10px solid #EBD7A5;
-  border-radius: 20px;
-  border-collapse: separate;
-  width: 100%;
-  background: #f7f7f7;
-  color: rgb(32, 32, 32);
-  font-size: 1.2em;
-  margin: 0 auto;
-  margin-bottom: 20px;
+    border: 10px solid #ebd7a5;
+    border-radius: 20px;
+    border-collapse: separate;
+    width: 100%;
+    background: #f7f7f7;
+    color: rgb(32, 32, 32);
+    font-size: 1.2em;
+    margin: 0 auto;
+    margin-bottom: 20px;
 
-  thead {
-    color: white;
-    background-color: #EBD7A5;
-  }
+    thead {
+      color: white;
+      background-color: #ebd7a5;
+    }
 
-  th,
-  td {
-    padding: 8px;
-    text-align: center;
-  }
+    th,
+    td {
+      padding: 8px;
+      text-align: center;
+    }
 
-  td {
-    padding: 12px;
-    border-bottom: 5px solid white;
-  }
+    td {
+      padding: 12px;
+      border-bottom: 5px solid white;
+    }
 
-  tr:last-child td {
-    border-bottom: none;
-  }
+    tr:last-child td {
+      border-bottom: none;
+    }
 
-  thead tr:first-child th {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
+    thead tr:first-child th {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
 
-  tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 20px;
-  }
+    tbody tr:last-child td:first-child {
+      border-bottom-left-radius: 20px;
+    }
 
-  tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 20px;
-  }
+    tbody tr:last-child td:last-child {
+      border-bottom-right-radius: 20px;
+    }
 
-  tr:hover {
-    background-color:rgba(235, 215, 165, 0.33);
+    tr:hover {
+      background-color: rgba(235, 215, 165, 0.33);
+    }
+  `;
+
+  if (notFound) {
+    return (
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <p>Equipo no encontrado</p>
+      </div>
+    );
   }
-`;
 
   return (
     <>
@@ -137,7 +135,9 @@ export default function Team() {
             {teamData.Squad}
           </h1>
           <h2>
-            {teamData.Rk}º {teamData.league}
+            <h2>
+              {loading ? "Cargando..." : `${teamData.Rk}º ${teamData.league}`}
+            </h2>
           </h2>
           <footer style={{ position: "absolute", bottom: "10px" }}>
             <p>
@@ -150,36 +150,52 @@ export default function Team() {
       <div>
         <h2>Partidos del equipo en {teamData.league}</h2>
         <Table>
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Local</th>
-          <th>Visitante</th>
-          <th>Resultado</th>
-          <th>Estadio</th>
-        </tr>
-      </thead>
-      <tbody>
-        {teamGames.slice(0).reverse().map((g) => (
-          <tr key={g.Home + g.Away}>
-            <td>
-              {gameToday(new Date(g.Date).toLocaleString().split(",")[0]) ? <Dot /> : ""}
-              {new Date(g.Date).toLocaleString().split(",")[0]} - {g.Time.split(":")[0]}:{g.Time.split(":")[1]}h
-              </td>
-            <td>
-              {g.Home === teamData.Squad ? <strong>{g.Home}</strong> : g.Home}
-            </td>
-            <td>
-              {g.Away === teamData.Squad ? <strong>{g.Away}</strong> : g.Away}
-            </td>
-            <td>
-              {g.Score === null ? "Por jugar" : `${g.Score}`}
-            </td>
-            <td>{g.Venue}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Local</th>
+              <th>Visitante</th>
+              <th>Resultado</th>
+              <th>Estadio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {teamGames
+              .slice(0)
+              .reverse()
+              .map((g) => (
+                <tr key={g.Home + g.Away}>
+                  <td>
+                    {gameToday(
+                      new Date(g.Date).toLocaleString().split(",")[0]
+                    ) ? (
+                      <Dot />
+                    ) : (
+                      ""
+                    )}
+                    {new Date(g.Date).toLocaleString().split(",")[0]} -{" "}
+                    {g.Time.split(":")[0]}:{g.Time.split(":")[1]}h
+                  </td>
+                  <td>
+                    {g.Home === teamData.Squad ? (
+                      <strong>{g.Home}</strong>
+                    ) : (
+                      g.Home
+                    )}
+                  </td>
+                  <td>
+                    {g.Away === teamData.Squad ? (
+                      <strong>{g.Away}</strong>
+                    ) : (
+                      g.Away
+                    )}
+                  </td>
+                  <td>{g.Score === null ? "Por jugar" : `${g.Score}`}</td>
+                  <td>{g.Venue}</td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
       </div>
     </>
   );

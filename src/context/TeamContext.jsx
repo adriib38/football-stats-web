@@ -17,6 +17,7 @@ export function TeamContextProvider({ children }) {
 
     const fetchAllData = async () => {
       setLoading(true);
+      setNotFound(false);
       
       try {
         const [teamResp, teamGamesResp] = await Promise.all([
@@ -24,12 +25,16 @@ export function TeamContextProvider({ children }) {
           getTeamGames(team)
         ]);
 
-        setTeamData(teamResp.data || []);
-        setTeamGames(teamGamesResp.data || []);
+        if (teamResp.resp.status === 404 || teamGamesResp.resp.status === 404) {
+          setNotFound(true);
+        } else {
+          setTeamData(teamResp.data || []);
+          setTeamGames(teamGamesResp.data || []);
+        }
 
       } catch (error) {
         setError(error.message);
-        console.error("Error al cargar datos:", error);
+        setNotFound(true);
       } finally {
         setLoading(false);
       }
@@ -46,6 +51,7 @@ export function TeamContextProvider({ children }) {
         teamGames,
         loading,
         error,
+        notFound
       }}
     >
       {children}

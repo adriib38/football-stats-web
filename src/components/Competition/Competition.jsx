@@ -36,6 +36,8 @@ export default function Competition() {
     }
   }, [classification, competition, setCompetition]);
 
+  document.title = competition;
+
   const proximoPartido = () => {
     let partidos = games.filter((game) => game.Score === null);
     partidos = partidos.slice(0, 3);

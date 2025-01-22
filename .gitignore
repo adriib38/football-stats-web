@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+/build
+.vercel
+vercel.json
 
 # misc
 .DS_Store
@@ -16,3 +19,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.vercel
