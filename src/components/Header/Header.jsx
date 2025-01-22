@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import ReactCountryFlag from "react-country-flag"
 
 export default function AppMenu() {
 
@@ -34,17 +35,31 @@ export default function AppMenu() {
     fontSize: "1.2em",
   };
 
+  const leagues = [
+    { path: "/c/laliga", name: "LaLiga", flag: "/img/flags/es.png", alt: "España" },
+    { path: "/c/premierleague", name: "Premier League", flag: "/img/flags/in.png"},
+    { path: "/c/seriea", name: "Serie A", flag: "/img/flags/it.png"},
+    { path: "/c/bundesliga", name: "Bundesliga", flag: "/img/flags/gr.png" },
+    { path: "/c/ligue1", name: "Ligue 1", flag: "/img/flags/fr.png", alt: "Francia" },
+    { path: "/c/hypermotion", name: "Hypermotion", flag: "/img/flags/es.png" },
+  ];
+
   return (
     <aside style={asideStyle}>
       <ul style={ulStyle}>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/laliga">LaLiga 🇪🇸</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/premierleague">Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/seriea">Serie A 🇮🇹</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/bundesliga">Bundesliga 🇩🇪</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)} to="/c/ligue1">Ligue 1 🇫🇷</NavLink></li>
-        <li><NavLink style={({isActive}) => (isActive ? activeStyle : aStyle)}  to="/c/hypermotion">Hypermotion 🇪🇸</NavLink></li>
+        {leagues.map((league) => (
+          <li key={league.path}>
+            <NavLink
+              style={({ isActive }) => (isActive ? activeStyle : aStyle)}
+              to={league.path}
+            >
+              {league.name} 
+              <img src={league.flag} width="20px" alt={league.alt} />
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </aside>
-  )
+  );
 }
   
