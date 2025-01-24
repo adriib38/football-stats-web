@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import colorsTeams from "../../utils/colorsTeams";
 import { TeamContext } from "../../context/TeamContext.jsx";
@@ -7,14 +7,42 @@ import Dot from "../../utils/Dot.jsx";
 
 export default function Team() {
   const { team: teamParam } = useParams();
-  const navigate = useNavigate();
 
   const { teamData, loading, setTeam, teamGames, notFound } =
     useContext(TeamContext);
+  const [gameDay, setGameday] = useState(null);
 
   useEffect(() => {
     if (teamParam) setTeam(teamParam);
   }, [teamParam, setTeam]);
+
+  useEffect(() => {
+    const fgameDay = () => {
+      setGameday(null)
+      const today = new Date();
+      teamGames.forEach((tg) => {
+        const gameDateUTC = new Date(tg.Date);
+        const localGameDate = new Date(
+          gameDateUTC.getUTCFullYear(),
+          gameDateUTC.getUTCMonth(),
+          gameDateUTC.getUTCDate() + 1
+        );
+
+        // Comparar solo año, mes y día
+        if (
+          localGameDate.getFullYear() === today.getFullYear() &&
+          localGameDate.getMonth() === today.getMonth() &&
+          localGameDate.getDate() === today.getDate()
+        ) {
+          setGameday(tg);
+        }
+      });
+    };
+
+    if (teamGames.length > 0) {
+      fgameDay();
+    }
+  }, [teamGames]);
 
   document.title = teamParam;
 
@@ -25,6 +53,11 @@ export default function Team() {
 
   const colorsTeam = colorsTeams.find((ct) => ct.name === teamData.Squad)
     ?.colors || ["#CCCCCC", "#DDDDDD"];
+  const getTeamColors = (teamName) => {
+    const colorsTeam = colorsTeams.find((ct) => ct.name === teamName)
+      ?.colors || ["#CCCCCC", "#DDDDDD"];
+    return colorsTeam;
+  };
 
   const Table = styled.table`
     border: 10px solid #ebd7a5;
@@ -135,9 +168,9 @@ export default function Team() {
             {teamData.Squad}
           </h1>
           <h2>
-            <h2>
+            <p>
               {loading ? "Cargando..." : `${teamData.Rk}º ${teamData.league}`}
-            </h2>
+            </p>
           </h2>
           <footer style={{ position: "absolute", bottom: "10px" }}>
             <p>
@@ -147,7 +180,100 @@ export default function Team() {
         </div>
       </div>
 
-      <div>
+      {gameDay && (
+        <article
+          style={{
+            position: "relative",
+            display: "flex",
+            padding: "20px",
+            justifyContent: "center",
+            textAlign: "center",
+            width: "30%",
+            margin: "0 auto",
+          }}
+        >
+          <div>
+            <h2
+              style={{
+                fontFamily: "RumbleBrave",
+                fontWeight: "initial",
+                fontsize: "30px",
+              }}
+            >
+              Matchday
+            </h2>
+            <p
+              style={{
+                fontSize: "20px",
+                fontWeight: "bold",
+                padding: "14px 5px",
+              }}
+            >
+              {gameDay.Home} Vs. {gameDay.Away}
+            </p>
+            <p style={{fontStyle: "italic"}}>
+              {gameDay.Venue} {gameDay.Time}
+            </p>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "5%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "row",
+              marginLeft: "30px",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: getTeamColors(gameDay.Home)[0],
+              }}
+            ></div>
+
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: getTeamColors(gameDay.Home)[1],
+              }}
+            ></div>
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: "5%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "row",
+              marginRight: "30px",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: getTeamColors(gameDay.Away)[0],
+              }}
+            ></div>
+
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: getTeamColors(gameDay.Away)[1],
+              }}
+            ></div>
+          </div>
+        </article>
+      )}
+      <div style={{ marginTop: "40px" }}>
         <h2>Partidos del equipo en {teamData.league}</h2>
         <Table>
           <thead>

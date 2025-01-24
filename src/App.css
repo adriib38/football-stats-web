@@ -7,3 +7,24 @@ h1, h2 {
     color: #4C476B;
     font-family: 'Roboto', sans-serif;
 }
+
+@font-face {
+    font-family: 'supercomic';
+    src: url('../public/fonts/SuperComic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal; 
+}
+
+
+@font-face {
+    font-family: 'MilkyVintage';
+    src: url('../public/fonts/MilkyVintage.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'RumbleBrave';
+    src: url('../public/fonts/RumbleBrave.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal; 
+}
+

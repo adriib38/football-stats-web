@@ -12,6 +12,8 @@
 .vercel
 vercel.json
 
+*/fonts/*
+
 # misc
 .DS_Store
 *env*

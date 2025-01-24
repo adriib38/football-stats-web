@@ -23,7 +23,6 @@ export default function SearchHeader() {
     }
   `;
 
-
   const inputStyle = {
     transition: "0.5s",
     outline: "none",
@@ -33,9 +32,8 @@ export default function SearchHeader() {
     width: "100%"
   }
 
-
   const fetchData = async () => {
-    const url = `https://seal-app-myhre.ondigitalocean.app/t/q/${query}`;
+    const url = `http://seal-app-myhre.ondigitalocean.app/t/q/${query}`;
     try {
       const res = await fetch(url);
       if (res.status !== 200) {
