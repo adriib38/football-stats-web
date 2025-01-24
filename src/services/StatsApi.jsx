@@ -1,5 +1,5 @@
+// const API_BASE_URL = process.env.API_BASE_URL ?? "http://localhost:3005/c";
 const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app/c";
-// const API_BASE_URL = "http://localhost:3005/c";
 
 export const getClassification = async(competition) => {
     const url = `${API_BASE_URL}/${competition}/classification`;

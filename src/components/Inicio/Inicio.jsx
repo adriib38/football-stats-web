@@ -6,6 +6,7 @@ export default function Inicio() {
         <div>
             <h1>Proximos partidos</h1>
             <NextGames />
+            <p>Estadisticas Champions League proximamente.</p>
         </div>
     )
 }

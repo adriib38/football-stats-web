@@ -7,6 +7,9 @@ import Inicio from './components/Inicio/Inicio';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { CompetitionContextProvider } from './context/CompetitionContext';
 import { TeamContextProvider } from './context/TeamContext';
+import { inject } from '@vercel/analytics';
+
+// inject();
 
 function App() {
   return (
