@@ -38,7 +38,6 @@ export default function TableClassification() {
     border: 10px solid #1b998b;
     border-radius: 20px;
     border-collapse: separate;
-    width: 95%;
     background: #f7f7f7;
     color: rgb(32, 32, 32);
     font-size: 1.2em;
@@ -46,6 +45,8 @@ export default function TableClassification() {
     margin-bottom: 20px;
     display: block;
     overflow-x: auto;
+    width: 100%; 
+    border-collapse: collapse;
 
     thead {
       color: white;
@@ -98,7 +99,11 @@ export default function TableClassification() {
   `;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column",
+      width: "100",
+      overflowX: "auto",
+      padding: "10px" 
+    }}>
       <Table>
         <thead>
           <tr>

@@ -8,14 +8,14 @@ const Table = styled.table`
   border: 10px solid #ebd7a5;
   border-radius: 20px;
   border-collapse: separate;
-  width: 95%;
+  width: fit-content;
   background: #f7f7f7;
   color: rgb(32, 32, 32);
   font-size: 1.2em;
   margin: 0 auto;
   margin-bottom: 20px;
-  display: block;
   overflow-x: auto;
+  width: 100%;
 
   thead {
     color: white;
@@ -104,6 +104,11 @@ export default function NextGames() {
   };
 
   return (
+    <div style={{
+      width: "100",
+      overflowX: "auto",
+      padding: "10px" 
+    }}>
     <Table>
       <thead>
         <tr>
@@ -114,7 +119,7 @@ export default function NextGames() {
         </tr>
       </thead>
       <tbody>
-        {nextGames.slice(0, 9).map((game) => (
+        {nextGames.slice(0, 25).map((game) => (
           <tr key={game.Home + game.Away + game.Time}>
             <td>
               {gameToday(new Date(game.Date).toLocaleString().split(",")[0]) ? (
@@ -147,5 +152,6 @@ export default function NextGames() {
         ))}
       </tbody>
     </Table>
+    </div>
   );
 }

@@ -3,10 +3,12 @@ import NextGames from "../Games/NextGames";
 export default function Inicio() {
 
     return (
-        <div>
+        <div style={{
+            margin: "0 auto"
+        }}>
             <h1>Proximos partidos</h1>
             <NextGames />
-            <p>Estadisticas Champions League proximamente.</p>
+            <p>Estadísticas competiciones europeas próximamente.</p>
         </div>
     )
 }

@@ -32,7 +32,7 @@ export default function Team() {
 
         if (
           localGameDate.getFullYear() === today.getFullYear() &&
-          localGameDate.getMonth()  === today.getMonth() &&
+          localGameDate.getMonth() === today.getMonth() &&
           localGameDate.getDate() === today.getDate()
         ) {
           // console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ":" + localGameDate.getDate() + localGameDate.getMonth()  + localGameDate.getFullYear())
@@ -42,10 +42,17 @@ export default function Team() {
 
       if (found) {
         // console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ": " + localGameDate.getDate() + localGameDate.getMonth() + localGameDate.getFullYear())
-        console.log(found.Home + found.Away)
+        console.log(found.Home + found.Away);
         setGameday(found);
       } else {
-        console.log("No hay partido para " + today.getDate() +":"+ today.getMonth() +":"+ today.getFullYear())
+        console.log(
+          "No hay partido para " +
+            today.getDate() +
+            ":" +
+            today.getMonth() +
+            ":" +
+            today.getFullYear()
+        );
 
         setGameday(null);
       }
@@ -75,14 +82,13 @@ export default function Team() {
     border: 10px solid #ebd7a5;
     border-radius: 20px;
     border-collapse: separate;
-    width: 95%;
     background: #f7f7f7;
     color: rgb(32, 32, 32);
     font-size: 1.2em;
     margin: 0 auto;
     margin-bottom: 20px;
-    display: block;
     overflow-x: auto;
+    width: 100%;
 
     thead {
       color: white;
@@ -225,7 +231,7 @@ export default function Team() {
             >
               {gameDay.Home} Vs. {gameDay.Away}
             </p>
-            <p style={{fontStyle: "italic"}}>
+            <p style={{ fontStyle: "italic" }}>
               {gameDay.Venue} {gameDay.Time}
             </p>
           </div>
@@ -287,7 +293,14 @@ export default function Team() {
           </div>
         </article>
       )}
-      <div style={{ marginTop: "40px" }}>
+      <div
+        style={{
+          marginTop: "40px",
+          width: "100",
+          overflowX: "auto",
+          padding: "10px",
+        }}
+      >
         <h2>Partidos del equipo en {teamData.league}</h2>
         <Table>
           <thead>

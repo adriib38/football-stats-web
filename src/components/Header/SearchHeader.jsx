@@ -26,10 +26,11 @@ export default function SearchHeader() {
   const inputStyle = {
     transition: "0.5s",
     outline: "none",
-    border: "3px solid #555",
+    border: "3px solid #fff",
     borderRadius: "3px",
     padding: "10px 5px",
-    width: "100%"
+    width: "100%",
+    minWidth: "200px"
   }
 
   const fetchData = async () => {

@@ -7,14 +7,14 @@ const Table = styled.table`
   border: 10px solid #EBD7A5;
   border-radius: 20px;
   border-collapse: separate;
-  width: 95%;
+  width: fit-content;
   background: #f7f7f7;
   color: rgb(32, 32, 32);
   font-size: 1.2em;
   margin: 0 auto;
   margin-bottom: 20px;
-  display: block;
   overflow-x: auto;
+  width: 100%; 
 
   thead {
     color: white;
@@ -64,6 +64,12 @@ export default function Games() {
   }
 
   return (
+    <div style={{
+      width: "100",
+      overflowX: "auto",
+      padding: "10px" 
+
+    }}>
     <Table>
       <thead>
         <tr>
@@ -91,5 +97,6 @@ export default function Games() {
         ))}
       </tbody>
     </Table>
+    </div>
   );
 }
