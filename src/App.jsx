@@ -9,7 +9,7 @@ import { CompetitionContextProvider } from './context/CompetitionContext';
 import { TeamContextProvider } from './context/TeamContext';
 import { inject } from '@vercel/analytics';
 
-// inject();
+inject();
 
 function App() {
   return (
