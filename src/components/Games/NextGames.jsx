@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import Dot from "../../utils/Dot";
 
-const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app /g";
+const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app/g";
 
 const Table = styled.table`
   border: 10px solid #ebd7a5;

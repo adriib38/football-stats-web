@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app /c";
+const API_BASE_URL = "https://seal-app-myhre.ondigitalocean.app/c";
 
 export const getClassification = async(competition) => {
     const url = `${API_BASE_URL}/${competition}/classification`;
