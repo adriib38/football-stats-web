@@ -18,6 +18,7 @@ export default function Team() {
 
   useEffect(() => {
     const fgameDay = () => {
+      console.log("fgameDay")
       const today = new Date();
       let found = null;
 
@@ -34,13 +35,17 @@ export default function Team() {
           localGameDate.getMonth() === today.getMonth() &&
           localGameDate.getDate() === today.getDate()
         ) {
+          console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ":" + localGameDate.getDate() + localGameDate.getMonth() + localGameDate.getFullYear())
           found = tg;
         }
       });
 
       if (found) {
+        // console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ": " + localGameDate.getDate() + localGameDate.getMonth() + localGameDate.getFullYear())
+        console.log(found.Home + found.Away)
         setGameday(found);
       } else {
+        console.log("No hay partido para " + today.getDate() + today.getMonth() + today.getFullYear() )
         setGameday(null);
       }
     };
