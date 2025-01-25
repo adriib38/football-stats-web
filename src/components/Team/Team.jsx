@@ -26,16 +26,16 @@ export default function Team() {
         const gameDateUTC = new Date(tg.Date);
         const localGameDate = new Date(
           gameDateUTC.getUTCFullYear(),
-          gameDateUTC.getUTCMonth(),
+          gameDateUTC.getUTCMonth()-1,
           gameDateUTC.getUTCDate() + 1
         );
 
         if (
           localGameDate.getFullYear() === today.getFullYear() &&
-          localGameDate.getMonth() === today.getMonth() &&
+          localGameDate.getMonth()  === today.getMonth()-1  &&
           localGameDate.getDate() === today.getDate()
         ) {
-          console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ":" + localGameDate.getDate() + localGameDate.getMonth() + localGameDate.getFullYear())
+          console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ":" + localGameDate.getDate() + localGameDate.getMonth()  + localGameDate.getFullYear())
           found = tg;
         }
       });
