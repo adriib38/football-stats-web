@@ -1,13 +1,14 @@
 const colorsTeams = [
-  { name: " Madrid", colors: ["#FFFFFF", "#4A148C"] },
+  { name: "Real Madrid", colors: ["#FFFFFF", "#4A148C"] },
   { name: "Barcelona", colors: ["#004D98", "#A50044"] },
   { name: "Atlético Madrid", colors: ["#E41B17", "#FFFFFF"] },
   { name: "Sevilla", colors: ["#FFFFFF", "#D50000"] },
-  { name: " Betis", colors: ["#009639", "#FFFFFF"] },
+  { name: "Betis", colors: ["#009639", "#FFFFFF"] },
   { name: "Valencia", colors: ["#FFFFFF", "#F76902"] },
   { name: "Villar", colors: ["#FFF200", "#005BAC"] },
-  { name: "Athletic Club", colors: ["#E10600", "#FFFFFF"] },
-  { name: " Sociedad", colors: ["#007DC5", "#FFFFFF"] },
+  { name: "Villar", colors: ["#FFF200", "#005BAC"] },
+  { name: "Valladolid", colors: ["#692C82", "#F4D209"] },
+  { name: "Sociedad", colors: ["#007DC5", "#FFFFFF"] },
   { name: "Celta de Vigo", colors: ["#A5CBE3", "#E3051C"] },
   { name: "Rayo Vallecano", colors: ["#FFFFFF", "#D81B60"] },
   { name: "Getafe", colors: ["#003DA5", "#DA291C"] },
@@ -53,6 +54,7 @@ const colorsTeams = [
   { name: "Ponferradina", colors: ["#1D4697", "#D15F39"] },
   { name: "Almería", colors: ["#ED1C24", "#FFFFFF"] },
   { name: "Levante", colors: ["#004D98", "#A50044"] },
+  { name: "La Coruña", colors: ["#085398", "#FFFFFF"] },
   { name: "Bayern Munich", colors: ["#FF0000", "#FFFFFF"] },
   { name: "Borussia Dortmund", colors: ["#FFCC00", "#000000"] },
   { name: "RB Leipzig", colors: ["#D50032", "#FFFFFF"] },
@@ -69,6 +71,7 @@ const colorsTeams = [
   { name: "FC Augsburg", colors: ["#E30613", "#FFFFFF"] },
   { name: "FSV Mainz 05", colors: ["#9E1B32", "#FFFFFF"] },
   { name: "Arminia Bielefeld", colors: ["#005F8C", "#FFFFFF"] },
+  { name: "Paris S-G", colors: ["#012971", "#F60015"] },
 ];
 
 export default colorsTeams;

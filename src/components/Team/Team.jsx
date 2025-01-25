@@ -18,24 +18,24 @@ export default function Team() {
 
   useEffect(() => {
     const fgameDay = () => {
-      console.log("fgameDay")
       const today = new Date();
       let found = null;
 
       teamGames.forEach((tg) => {
         const gameDateUTC = new Date(tg.Date);
         const localGameDate = new Date(
-          gameDateUTC.getUTCFullYear(),
-          gameDateUTC.getUTCMonth()-1,
-          gameDateUTC.getUTCDate() + 1
+          gameDateUTC.getFullYear(),
+          gameDateUTC.getMonth(),
+          gameDateUTC.getDate()
         );
+        // console.log("Buscando para " + gameDateUTC.getDate() +":"+ gameDateUTC.getMonth() +":"+ gameDateUTC.getFullYear())
 
         if (
           localGameDate.getFullYear() === today.getFullYear() &&
-          localGameDate.getMonth()  === today.getMonth()-1  &&
+          localGameDate.getMonth()  === today.getMonth() &&
           localGameDate.getDate() === today.getDate()
         ) {
-          console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ":" + localGameDate.getDate() + localGameDate.getMonth()  + localGameDate.getFullYear())
+          // console.log("Partido para " + today.getDate() + today.getMonth() + today.getFullYear() + ":" + localGameDate.getDate() + localGameDate.getMonth()  + localGameDate.getFullYear())
           found = tg;
         }
       });
@@ -45,7 +45,8 @@ export default function Team() {
         console.log(found.Home + found.Away)
         setGameday(found);
       } else {
-        console.log("No hay partido para " + today.getDate() + today.getMonth() + today.getFullYear() )
+        console.log("No hay partido para " + today.getDate() +":"+ today.getMonth() +":"+ today.getFullYear())
+
         setGameday(null);
       }
     };
