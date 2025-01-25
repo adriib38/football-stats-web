@@ -31,7 +31,7 @@ export default function TableStats() {
     border: 10px solid #4C476B;
     border-radius: 20px;
     border-collapse: separate;
-    width: 100%;
+    width: 95%;
     background: #f7f7f7;
     color: rgb(32, 32, 32);
     font-size: 1.2em;
