@@ -33,7 +33,7 @@ export default function SearchHeader() {
   }
 
   const fetchData = async () => {
-    const url = `http://seal-app-myhre.ondigitalocean.app/t/q/${query}`;
+    const url = `https://seal-app-myhre.ondigitalocean.app /t/q/${query}`;
     try {
       const res = await fetch(url);
       if (res.status !== 200) {

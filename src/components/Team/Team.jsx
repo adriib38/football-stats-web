@@ -18,8 +18,9 @@ export default function Team() {
 
   useEffect(() => {
     const fgameDay = () => {
-      setGameday(null)
       const today = new Date();
+      let found = null;
+
       teamGames.forEach((tg) => {
         const gameDateUTC = new Date(tg.Date);
         const localGameDate = new Date(
@@ -28,15 +29,20 @@ export default function Team() {
           gameDateUTC.getUTCDate() + 1
         );
 
-        // Comparar solo año, mes y día
         if (
           localGameDate.getFullYear() === today.getFullYear() &&
           localGameDate.getMonth() === today.getMonth() &&
           localGameDate.getDate() === today.getDate()
         ) {
-          setGameday(tg);
+          found = tg;
         }
       });
+
+      if (found) {
+        setGameday(found);
+      } else {
+        setGameday(null);
+      }
     };
 
     if (teamGames.length > 0) {

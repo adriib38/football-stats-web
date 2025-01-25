@@ -53,6 +53,22 @@ const colorsTeams = [
   { name: "Ponferradina", colors: ["#1D4697", "#D15F39"] },
   { name: "Almería", colors: ["#ED1C24", "#FFFFFF"] },
   { name: "Levante", colors: ["#004D98", "#A50044"] },
+  { name: "Bayern Munich", colors: ["#FF0000", "#FFFFFF"] },
+  { name: "Borussia Dortmund", colors: ["#FFCC00", "#000000"] },
+  { name: "RB Leipzig", colors: ["#D50032", "#FFFFFF"] },
+  { name: "Bayer Leverkusen", colors: ["#E30613", "#000000"] },
+  { name: "Borussia Mönchengladbach", colors: ["#FFFFFF", "#000000"] },
+  { name: "VfB Stuttgart", colors: ["#E30613", "#FFFFFF"] },
+  { name: "Eintracht Frankfurt", colors: ["#000000", "#FFFFFF"] },
+  { name: "VfL Wolfsburg", colors: ["#006747", "#FFFFFF"] },
+  { name: "SC Freiburg", colors: ["#D50032", "#FFFFFF"] },
+  { name: "TSG Hoffenheim", colors: ["#0061B1", "#FFFFFF"] },
+  { name: "FC Köln", colors: ["#FFFFFF", "#E30613"] },
+  { name: "VfL Bochum", colors: ["#005F8C", "#FFFFFF"] },
+  { name: "Werder Bremen", colors: ["#006F2A", "#FFFFFF"] },
+  { name: "FC Augsburg", colors: ["#E30613", "#FFFFFF"] },
+  { name: "FSV Mainz 05", colors: ["#9E1B32", "#FFFFFF"] },
+  { name: "Arminia Bielefeld", colors: ["#005F8C", "#FFFFFF"] },
 ];
 
 export default colorsTeams;
