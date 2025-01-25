@@ -37,6 +37,8 @@ export default function TableStats() {
     font-size: 1.2em;
     margin: 0 auto;
     margin-bottom: 20px;
+    display: block;
+    overflow-x: auto;
 
     thead {
       color: white;

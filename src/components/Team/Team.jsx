@@ -81,6 +81,8 @@ export default function Team() {
     font-size: 1.2em;
     margin: 0 auto;
     margin-bottom: 20px;
+    display: block;
+    overflow-x: auto;
 
     thead {
       color: white;
@@ -200,7 +202,7 @@ export default function Team() {
             padding: "20px",
             justifyContent: "center",
             textAlign: "center",
-            width: "30%",
+            maxwidth: "40%",
             margin: "0 auto",
           }}
         >
