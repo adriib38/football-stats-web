@@ -62,7 +62,7 @@ export default function NextGames() {
 
   // Función para obtener los próximos juegos
   const getNextGames = async () => {
-    const url = `${API_BASE_URL}/nextgames`;
+    const url = `${API_BASE_URL}/g/nextgames`;
     try {
       const resp = await fetch(url, {
         method: "GET",
