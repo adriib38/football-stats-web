@@ -129,6 +129,7 @@ export default function Competition() {
               borderRadius: "10px",
               height: "fit-content",
               color: "white",
+              animation: "slideRight .5s ease-out forwards"
             }}
           >
             <img
@@ -151,6 +152,7 @@ export default function Competition() {
               borderRadius: "10px",
               height: "fit-content",
               color: "white",
+              animation: "slideUp .5s ease-out forwards"
             }}
           >
             <p
@@ -170,6 +172,7 @@ export default function Competition() {
               borderRadius: "10px",
               height: "fit-content",
               color: "white",
+              animation: "slideUp .5s ease-out forwards"
             }}
           >
             <p

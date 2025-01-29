@@ -45,7 +45,6 @@ export default function TableClassification() {
     margin-bottom: 20px;
     display: block;
     overflow-x: auto;
-    width: 100%; 
     border-collapse: collapse;
 
     thead {
